@@ -34,3 +34,14 @@ build:
         code: |
           echo "node version $(node -v) running"
           echo "npm version $(npm -v) running"
+
+    - internal/docker-push:
+            entrypoint: bin/get_ip
+            cmd: 0.0.0.0 8080
+            working-dir: $WERCKER_ROOT
+            ports: "8080"
+            tag: my-tag
+            username: $USERNAME
+            password: $PASSWORD
+            repository: $USERNAME/bitcoinconversion
+            registry: https://iad.ocir.io/v2
